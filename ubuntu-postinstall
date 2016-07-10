@@ -1,0 +1,110 @@
+#!/bin/bash
+# Other things to install:
+# Google Chrome
+
+INSTALL_DIR=~/Desktop/PostInstall
+GIT_VER=2.7.2
+NODE_VER=6.3.0
+
+mkdir $INSTALL_DIR
+cd $INSTALL_DIR
+
+## Simple installs
+sudo apt-get install build-essential tmux autoconf openjdk-8-jdk unity-tweak-tool cmake unzip
+
+## Git
+sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext \
+    libz-dev libssl-dev
+wget https://github.com/git/git/archive/v"$GIT_VER".tar.gz
+tar -zxf v"$GIT_VER".tar.gz
+cd git-"$GIT_VER"
+make configure
+./configure --prefix=/usr
+make all doc
+sudo make install install-doc
+cd ..
+rm -rf v"$GIT_VER".tar.gz git-"$GIT_VER"
+git clone https://github.com/git/git.git
+git config --global user.name "TashaGospel"
+git config --global user.email "nhanhnhanh17399@gmail.com"
+git config --global alias.l "log --all --oneline --decorate --graph"
+git config --global core.editor "vim"
+git config --global push.default simple
+git config --global credential.helper 'cache --timeout=3600'
+
+## Vim
+sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
+    libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev ruby-dev
+git clone https://github.com/vim/vim.git
+cd vim
+./configure --with-features=huge \
+            --enable-multibyte \
+            --enable-rubyinterp \
+            --enable-pythoninterp \
+            --with-python-config-dir=/usr/lib/python2.7/config \
+            --enable-perlinterp \
+            --enable-luainterp \
+            --enable-gui=gtk2 --enable-cscope --prefix=/usr
+make VIMRUNTIMEDIR=/usr/share/vim/vim74
+sudo make install
+cd $INSTALL_DIR
+
+## Vundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+## Emacs
+# Install Emacs 24 GUI from Ubuntu Software
+# Don't do: sudo apt-get install emacs
+
+## Spacemacs
+# After installing Emacs
+# git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+## Monaco
+git clone https://github.com/cstrap/monaco-font.git
+cd monaco-font
+./install-font-ubuntu.sh http://usystem.googlecode.com/files/MONACO.TTF
+cd $INSTALL_DIR
+
+## Node
+wget https://nodejs.org/dist/latest/node-v"$NODE_VER"-linux-x64.tar.gz
+sudo tar -C /usr/local --strip-components 1 -xzf node-v"$NODE_VER"-linux-x64.tar.gz
+rm node-v"$NODE_VER"-linux-x64.tar.gz
+cd /usr/local
+sudo rm CHANGELOG.md LICENSE README.md
+cd $INSTALL_DIR
+
+## Leiningen
+sudo wget -O /bin/lein https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+sudo chmod a+x /bin/lein
+lein
+
+## Heroku Toolbelt
+wget -O - https://toolbelt.heroku.com/install-ubuntu.sh | sh
+heroku
+
+## Infinality
+sudo add-apt-repository ppa:no1wantdthisname/ppa
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install fontconfig-infinality
+
+## Ubuntu flat theme
+wget https://github.com/anmoljagetia/Flatabulous/archive/master.zip
+unzip Flatabulous-master.zip
+sudo mv Flatabulous-master /usr/share/themes
+rm Flatabulous-master.zip
+# Get the flat icons at http://ppa.launchpad.net/noobslab/icons/ubuntu/pool/main/u/
+
+## Xcape
+sudo apt-get install git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
+git clone https://github.com/alols/xcape.git
+cd xcape
+make
+sudo make install
+cd $INSTALL_DIR
+
+## Workman-P
+wget https://raw.githubusercontent.com/ojbucao/Workman/master/xorg/workman-p
+sudo mv workman-p /usr/share/X11/xkb/symbols/ 
