@@ -64,7 +64,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ## Monaco
 git clone https://github.com/cstrap/monaco-font.git
 cd monaco-font
-./install-font-ubuntu.sh http://usystem.googlecode.com/files/MONACO.TTF
+./install-font-ubuntu.sh https://github.com/todylu/monaco.ttf/blob/master/monaco.ttf?raw=true
 cd $INSTALL_DIR
 
 ## Node
