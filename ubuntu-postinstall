@@ -67,6 +67,9 @@ cd monaco-font
 ./install-font-ubuntu.sh https://github.com/todylu/monaco.ttf/blob/master/monaco.ttf?raw=true
 cd $INSTALL_DIR
 
+## Monokai Theme for Intellij
+# https://github.com/y3sh/Intellij-Colors-Sublime-Monokai
+
 ## Node
 wget https://nodejs.org/dist/latest/node-v"$NODE_VER"-linux-x64.tar.gz
 sudo tar -C /usr/local --strip-components 1 -xzf node-v"$NODE_VER"-linux-x64.tar.gz
